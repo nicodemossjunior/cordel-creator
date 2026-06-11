@@ -1,5 +1,5 @@
 const CordelBriefing = require("../models/cordel-briefing")
-const openai = require("../config/openai")
+const ai = require("../services/ai")
 
 module.exports = {
     async createCordel(req, res) {
@@ -12,11 +12,8 @@ module.exports = {
             })
         }
 
-        const openaiAPI = openai.configuration()
-
         try {
-            const response = await openaiAPI.chat.completions.create(openai.cordelCompletion(briefing))
-            const content = response.choices[0].message.content
+            const content = await ai.createCordel(briefing)
 
             return res.status(200).json({
                 success: true,
@@ -24,11 +21,9 @@ module.exports = {
             })
         } catch (error) {
             console.log(error)
-            return res.status(400).json({
+            return res.status(500).json({
                 success: false,
-                error: error.response
-                    ? error.response.data
-                    : "there was an issue on the server"
+                error: error.message || "Não foi possível gerar o cordel"
             })
         }
     }
