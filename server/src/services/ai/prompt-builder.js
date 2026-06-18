@@ -39,9 +39,9 @@ function getVerseLimit(briefing) {
 
 function getMaxOutputTokens(briefing) {
     const verseLimit = getVerseLimit(briefing)
-    const estimatedTokens = 120 + verseLimit * 14
+    const estimatedTokens = 400 + verseLimit * 45
     const envLimit = Number.parseInt(process.env.MAX_OUTPUT_TOKENS, 10)
-    const hardLimit = Number.isNaN(envLimit) ? 900 : envLimit
+    const hardLimit = Number.isNaN(envLimit) ? 4096 : envLimit
 
     return Math.min(estimatedTokens, hardLimit)
 }

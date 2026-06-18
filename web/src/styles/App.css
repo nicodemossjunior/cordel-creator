@@ -224,9 +224,40 @@ button:disabled {
   margin: 0 0 0.45rem;
 }
 
+.loading-state {
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+.loading-state p {
+  margin: 0;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid rgba(31, 27, 24, 0.16);
+  border-top-color: var(--cactus);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
 .placeholder {
   color: var(--muted);
   font-family: inherit;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 980px) {

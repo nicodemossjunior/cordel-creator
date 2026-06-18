@@ -34,6 +34,7 @@ function App() {
     event.preventDefault();
     setLoading(true);
     setError('');
+    setCordel('');
 
     try {
       const response = await makeCordel(form);
@@ -166,7 +167,12 @@ function App() {
             <h2>{previewTitle}</h2>
           </div>
           <article className="cordel-output">
-            {cordel ? (
+            {loading ? (
+              <div className="loading-state" role="status" aria-label="Criando cordel">
+                <span className="spinner" aria-hidden="true" />
+                <p>Criando cordel...</p>
+              </div>
+            ) : cordel ? (
               cordel.split('\n').map((line, index) => (
                 <p key={`${line}-${index}`}>{line || '\u00A0'}</p>
               ))
